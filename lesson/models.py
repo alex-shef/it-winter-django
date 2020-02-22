@@ -1,8 +1,14 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 # Create your models here.
+
+
+class PublishedManager(models.Manager):
+    def get_queryset(self):
+        return super(PublishedManager, self).get_queryset().filter(status='public', publish__year=2020)
 
 
 class Material(models.Model):
@@ -35,9 +41,17 @@ class Material(models.Model):
     author = models.ForeignKey(User,
                                on_delete=models.CASCADE,
                                related_name='user_materials')
-
+    published = PublishedManager()
+    objects = models.Manager()
     # class Meta:
     #     ordering = ('-publish', )
     #
     # def __str__(self):
     #     return self.title
+
+    def get_absolute_url(self):
+        return reverse('lesson:material_details',
+                       args=[self.publish.year,
+                             self.publish.month,
+                             self.publish.day,
+                             self.slug])

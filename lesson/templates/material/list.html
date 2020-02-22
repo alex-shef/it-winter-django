@@ -5,7 +5,9 @@
 {% block content %}
     <h1>My Materials</h1>
     {% for material in materials %}
-        <h2>{{ material.title }}</h2>
+        <h2>
+            <a href="{{ material.get_absolute_url }}">{{ material.title }}</a>
+        </h2>
         <p>
             Published {{ material.publish }} by {{ material.author }}
         </p>
