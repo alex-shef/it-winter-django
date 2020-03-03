@@ -9,6 +9,7 @@ app_name = 'lesson'
 class MyHackedView(au_views.PasswordResetView):
     success_url = reverse_lazy('lesson:password_reset_done')
 
+
 urlpatterns = [
     path('', views.all_materials, name='all_materials'),
     # path('', views.MaterialListView.as_view(), name='all_materials'),

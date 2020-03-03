@@ -13,6 +13,7 @@ from . import forms
 
 @login_required
 def all_materials(request):
+    # import pdb; pdb.set_trace()
     material_list = models.Material.objects.all()
     # material_list = models.Material.published.all()
     return render(request,
