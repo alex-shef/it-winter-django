@@ -13,7 +13,8 @@
 
 
     {% else %}
-        <a href="{% url "lesson:login" %}"> logout </a>
+        <a href="{% url "lesson:login" %}"> login </a>
+        <a href="{% url "lesson:register" %}"> register </a>
     {% endif %}
 </header>
     {% block content %}

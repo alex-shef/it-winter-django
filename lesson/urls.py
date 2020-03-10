@@ -36,6 +36,7 @@ urlpatterns = [
          ),
     path('reset/done/', au_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
     path('profile/', views.view_profile, name='profile'),
+    path('register/', views.register, name='register'),
 ]
 
 if settings.DEBUG:
