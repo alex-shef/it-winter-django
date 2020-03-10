@@ -122,3 +122,8 @@ def user_login(request):
     else:
         form = forms.LoginForm()
     return render(request, 'login.html', {'form': form})
+
+
+@login_required
+def view_profile(request):
+    return render(request, 'profile.html', {'user': request.user})
