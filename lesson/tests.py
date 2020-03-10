@@ -2,7 +2,7 @@ from django.test import TestCase, Client
 import ddt
 from lesson import models
 # Create your tests here.
-
+from unittest import mock
 
 @ddt.ddt
 class MaterialTestCase(TestCase):
@@ -52,3 +52,31 @@ class MaterialTestCase(TestCase):
                                      "status": 'private'})
         mat = models.Material.objects.get()
         self.assertEqual(mat.slug, expected_slug)
+
+    def test_send_mail(self):
+        mat = models.Material(slug='slug',
+                              author=self.user,
+                              body='mybody')
+        mat.save()
+        with mock.patch('lesson.views.send_mail') as mail_mock:
+            response = self.client.post('/' + str(mat.id) + '/share/',
+                                        {"name": "name",
+                                         "my_email": "dd@dd.ru",
+                                         "to": "addr@dd.ru",
+                                         "comment": "adsfadsf"})
+        mail_mock.assert_called_once()
+
+    @mock.patch('lesson.views.send_mail')
+    def test_send_mail_args(self, mail_mock):
+        mat = models.Material(slug='slug',
+                              author=self.user,
+                              body='mybody')
+        mat.save()
+
+        response = self.client.post('/' + str(mat.id) + '/share/',
+                                    {"name": "name",
+                                     "my_email": "dd@dd.ru",
+                                     "to": "addr@dd.ru",
+                                     "comment": "adsfadsf"})
+        mail_mock.assert_called_once()
+        mail_mock.assert_called_with()
