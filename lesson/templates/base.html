@@ -10,6 +10,7 @@
         Hi {{ request.user.first_name }}
     <a href="{% url "lesson:logout" %}"> logout </a>
     <a href="{% url "lesson:profile" %}"> Profile </a>
+    <a href="{% url "lesson:edit" %}"> Edit Profile </a>
 
 
     {% else %}

@@ -26,6 +26,7 @@ class CommentForm(forms.ModelForm):
         model = models.Comment
         fields = ('name', 'email', 'body')
 
+
 class UserRegistrationForm(forms.ModelForm):
 
     password = forms.CharField(label='Pass',
@@ -42,3 +43,15 @@ class UserRegistrationForm(forms.ModelForm):
         if cd['password'] != cd['password2']:
             raise forms.ValidationError('bad pass')
         return cd['password2']
+
+
+class ProfileEditForm(forms.ModelForm):
+    class Meta:
+        model = models.Profile
+        fields = ('birth', 'photo')
+
+
+class UserEditForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name', 'email')
