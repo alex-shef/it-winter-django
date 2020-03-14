@@ -165,3 +165,18 @@ def edit(request):
                   {'user_form': user_form,
                    'profile_form': profile_form})
 
+
+def all_lessons(request):
+    lessons = models.Lesson.objects.all()
+    return render(request,
+                  'lesson/list.html',
+                  {"lessons": lessons})
+
+
+def lesson_details(request, slug):
+    lesson = get_object_or_404(models.Lesson, slug=slug)
+    lessons = models.Lesson.objects.all()
+    return render(request,
+                  'lesson/detail.html',
+                  {'lesson': lesson,
+                   'lessons': lessons})

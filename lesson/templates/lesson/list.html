@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Lesson list{% endblock %}
+
+{% block content %}
+    <h1>My Lessons</h1>
+    {% for lesson in lessons %}
+        <h2>
+            <a href="{{ lesson.get_absolute_url }}">{{ lesson.title }}</a>
+        </h2>
+        <p>
+            {{ lesson.body|linebreaks|truncatewords_html:5 }}
+        </p>
+    {% endfor %}
+{% endblock %}
+{% block menu %}
+    Lessons:
+    {% for lesson in lessons %}
+        <a class="nav-link active" href="{{ lesson.get_absolute_url }}">
+            {{ lesson.title }}
+        </a>
+    {% endfor %}
+{% endblock %}

@@ -25,3 +25,8 @@ class CommentAdmin(admin.ModelAdmin):
 @admin.register(models.Profile)
 class ProfileAdmin(admin.ModelAdmin):
     pass
+
+
+@admin.register(models.Lesson)
+class LessonAdmin(admin.ModelAdmin):
+    pass

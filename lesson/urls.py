@@ -14,8 +14,10 @@ class MyHackedView(au_views.PasswordResetView):
 
 
 urlpatterns = [
-    path('', views.all_materials, name='all_materials'),
+    path('materials/', views.all_materials, name='all_materials'),
     # path('', views.MaterialListView.as_view(), name='all_materials'),
+    path('', views.all_lessons, name='all_lessons'),
+    path('lesson/<slug:slug>/', views.lesson_details, name='lesson_details'),
     path('<int:year>/<int:month>/<int:day>/<slug:slug>/',
          views.material_details,
          name='material_details'),
